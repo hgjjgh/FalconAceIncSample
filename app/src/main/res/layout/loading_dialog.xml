@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:translationZ="10dp"
+    android:background="@android:color/transparent">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/teal_700" />
+</merge>
