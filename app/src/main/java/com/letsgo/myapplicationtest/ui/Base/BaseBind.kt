@@ -11,13 +11,11 @@ import java.util.*
 
 @BindingAdapter("app:glideBackground")
 fun glideBackground(imageView: ImageView, url: String?) {
-    url?.run {
-        Glide.with(imageView.context)
-            .load(url)
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .error(R.drawable.ic_launcher_foreground)
-            .into(imageView)
-    }
+    Glide.with(imageView.context)
+        .load(url)
+        .placeholder(R.drawable.ic_launcher_foreground)
+        .error(R.drawable.ic_launcher_foreground)
+        .into(imageView)
 }
 
 @BindingAdapter("app:timeFormat")

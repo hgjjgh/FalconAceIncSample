@@ -10,11 +10,16 @@
         <variable
             name="bean"
             type="com.letsgo.myapplicationtest.network.service.response.Item" />
+
+        <variable
+            name="itemClick"
+            type="com.letsgo.myapplicationtest.callBack.NewsItemClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{(v) -> itemClick.onNewsItemClick(bean.ref)}"
         android:padding="10dp">
 
         <androidx.cardview.widget.CardView
@@ -72,7 +77,6 @@
                 android:layout_marginTop="5dp"
                 android:text="@{bean.appearance.subTitle}"
                 android:textColor="@color/gray"
-                android:textSize="16sp"
                 android:visibility="@{bean.appearance.subTitle.empty || bean.appearance.subTitle == null ? View.GONE:View.VISIBLE}"
                 tools:text="快訊" />
 

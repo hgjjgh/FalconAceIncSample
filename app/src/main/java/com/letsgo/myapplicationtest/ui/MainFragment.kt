@@ -1,18 +1,21 @@
 package com.letsgo.myapplicationtest.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.letsgo.myapplicationtest.callBack.NewsItemClick
 import com.letsgo.myapplicationtest.databinding.MainFragmentBinding
 import com.letsgo.myapplicationtest.network.repository.NewsRepository
 import com.letsgo.myapplicationtest.ui.adapter.NewsAdapter
 import com.letsgo.myapplicationtest.viewmodel.MainViewModel
 import com.letsgo.myapplicationtest.viewmodel.factory.BaseViewModelFactory
 
-class MainFragment : BaseFragment() {
+class MainFragment : BaseFragment(), NewsItemClick {
     private lateinit var binding: MainFragmentBinding
     private val mainViewModel: MainViewModel by lazy {
         val factory = BaseViewModelFactory(
@@ -52,9 +55,18 @@ class MainFragment : BaseFragment() {
             newsList.observe(viewLifecycleOwner) {
                 binding.newsRecyclerView.apply {
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    adapter = NewsAdapter(it)
+                    adapter = NewsAdapter(it, this@MainFragment)
                 }
             }
         }
+    }
+
+    override fun onNewsItemClick(ref: String?) {
+        val intent = Intent()
+        intent.apply {
+            action = Intent.ACTION_VIEW
+            data = Uri.parse(ref ?:"")
+        }
+        startActivity(intent)
     }
 }

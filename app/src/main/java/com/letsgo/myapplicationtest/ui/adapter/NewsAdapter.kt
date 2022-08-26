@@ -3,6 +3,7 @@ package com.letsgo.myapplicationtest.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.letsgo.myapplicationtest.callBack.NewsItemClick
 import com.letsgo.myapplicationtest.common.CommonConfig
 import com.letsgo.myapplicationtest.databinding.NewsHeaderBinding
 import com.letsgo.myapplicationtest.databinding.NewsItemBinding
@@ -11,10 +12,11 @@ import com.letsgo.myapplicationtest.network.service.response.Item
 const val HEADER = 0
 const val CONTENT = 1
 
-class NewsAdapter(private val newsList: List<Item>?) : RecyclerView.Adapter<ViewHolderBase>() {
+class NewsAdapter(private val newsList: List<Item>?, private val callBack: NewsItemClick) :
+    RecyclerView.Adapter<ViewHolderBase>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBase {
-        val binding = when(viewType) {
+        val binding = when (viewType) {
             HEADER -> {
                 NewsHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -37,12 +39,13 @@ class NewsAdapter(private val newsList: List<Item>?) : RecyclerView.Adapter<View
         val binding = holder.binding
         val bean = newsList?.get(position)
 
-        when(binding) {
+        when (binding) {
             is NewsHeaderBinding -> {
-                binding.title = bean?.title ?:""
+                binding.title = bean?.title ?: ""
             }
             is NewsItemBinding -> {
                 binding.bean = bean
+                binding.itemClick = callBack
             }
         }
     }
